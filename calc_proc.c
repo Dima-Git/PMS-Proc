@@ -1,3 +1,4 @@
+#include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
@@ -58,9 +59,7 @@ static int calc_proc_opA_open(struct inode *inode, struct  file *file)
 
 ssize_t writeA_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
 {
-	int i = 0;
-	for (i = 0, opA = 0; i < count - 1; ++ i)
-		opA = opA * 10 + (buf[i]-'0');
+	sscanf(buf, "%d", &opA);
 	return count;
 }
 
@@ -86,9 +85,7 @@ static int calc_proc_opB_open(struct inode *inode, struct  file *file)
 
 ssize_t writeB_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
 {
-	int i = 0;
-	for (i = 0, opB = 0; i < count - 1; ++ i)
-		opB = opB * 10 + (buf[i]-'0');
+	sscanf(buf, "%d", &opB);
 	return count;
 }
 
