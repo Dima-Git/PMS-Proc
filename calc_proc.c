@@ -56,7 +56,7 @@ static int calc_proc_opA_open(struct inode *inode, struct  file *file)
 	return single_open(file, calc_proc_opA_show, NULL);
 }
 
-int writeA_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
+ssize_t writeA_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
 {
 	int i = 0;
 	for (i = 0, opA = 0; i < count - 1; ++ i)
@@ -84,7 +84,7 @@ static int calc_proc_opB_open(struct inode *inode, struct  file *file)
 	return single_open(file, calc_proc_opB_show, NULL);
 }
 
-int writeB_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
+ssize_t writeB_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
 {
 	int i = 0;
 	for (i = 0, opB = 0; i < count - 1; ++ i)
@@ -101,7 +101,7 @@ static const struct file_operations calc_proc_opB_fops = {
 	.release = single_release,
 };
 
-int writeact_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
+ssize_t writeact_proc(struct file *filp,const char *buf,size_t count,loff_t *offp)
 {
 	act = buf[0];
 	return count;
